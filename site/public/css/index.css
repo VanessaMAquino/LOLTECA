@@ -1,0 +1,133 @@
+
+
+/* Definindo o estilo geral do corpo da página */
+body {
+    background-color: #222; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto */
+    font-family: Arial, sans-serif; /* Fonte do texto */
+  }
+  
+  .header a img {
+    width: 150px; /* Definir a largura da imagem */
+  }
+  
+  /* Estilizando o cabeçalho */
+  .header {
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    padding: 20px; /* Espaçamento interno do cabeçalho */
+  }
+  
+  /* Estilizando os links da barra de navegação */
+  .header a {
+    color: #fff; /* Cor dos links do cabeçalho */
+    text-decoration: none; /* Removendo sublinhado dos links */
+    display: inline-block; /* Exibir o link como um bloco inline */
+  }
+  
+  /* Estilizando os botões da barra de navegação */
+  .navbar_botoes a {
+    color: #fff; /* Cor dos botões */
+    text-decoration: none; /* Removendo sublinhado dos botões */
+    margin-right: 10px; /* Espaçamento entre os botões */
+    margin: 0 10px; /* Adicionar margem entre os botões */
+  }
+  .navbar_botoes {
+    text-align: center; /* Centralizar o texto dos botões */
+  }
+
+  .banner {
+    display: flex; /* Aplicar um layout flexível */
+    justify-content: center; /* Centralizar horizontalmente o conteúdo */
+    align-items: center; /* Centralizar verticalmente o conteúdo */
+  }
+  
+  /* Estilizando a imagem do banner */
+  .banner img {
+    width: 100%; /* Largura da imagem do banner */
+  }
+  
+  /* Estilizando os avisos de formulário */
+  .avisos_formulario {
+    background-color: #444; /* Cor de fundo dos avisos */
+    padding: 20px; /* Espaçamento interno dos avisos */
+    margin-bottom: 20px; /* Espaçamento entre os avisos */
+  }
+  
+  .avisos_formulario h2 {
+    color: #fff; /* Cor do título dos avisos */
+    font-size: 20px; /* Tamanho do título dos avisos */
+  }
+  
+  .avisos_formulario p {
+    color: #ccc; /* Cor do texto dos avisos */
+  }
+  
+  .avisos_formulario a {
+    color: #fff; /* Cor do link dos avisos */
+    text-decoration: none; /* Removendo sublinhado do link */
+    background-color: #666; /* Cor de fundo do link dos avisos */
+    padding: 10px 20px; /* Espaçamento interno do link dos avisos */
+  }
+  
+  /* Estilizando a seção "O que é League of Legends" */
+  .sobre_lol {
+    background-color: #333; /* Cor de fundo da seção */
+    padding: 20px; /* Espaçamento interno da seção */
+  }
+  
+  .sobre_lol h2 {
+    color: #fff; /* Cor do título da seção */
+    font-size: 20px; /* Tamanho do título da seção */
+  }
+  
+  .sobre_lol p {
+    color: #ccc; /* Cor do texto da seção */
+  }
+  
+  /* Estilizando a seção de ajuda */
+  .ajuda {
+    display: flex; /* Utilizando o modelo flexbox para posicionar elementos em linha */
+    align-items: center; /* Alinhando os elementos verticalmente */
+    background-color: #222; /* Cor de fundo da seção */
+    padding: 20px; /* Espaçamento interno da seção */
+    margin-bottom: 20px; /* Espaçamento entre as seções */
+  }
+  
+  .ajuda img {
+    width: 50%; /* Largura da imagem de ajuda */
+    margin-right: 20px; /* Espaçamento à direita da imagem */
+  }
+  
+  .ajuda_texto h2 {
+    color: #fff; /* Cor do título da seção de ajuda */
+    font-size: 20px; /* Tamanho do título da seção de ajuda */
+  }
+  
+  .ajuda_texto p {
+    color: #ccc; /* Cor do texto da seção de ajuda */
+  }
+  
+  /* Estilizando a seção "Nós estamos aqui para te ajudar" */
+  .sobre {
+    background-color: #333; /* Cor de fundo da seção */
+    padding: 20px; /* Espaçamento interno da seção */
+    text-align: center; /* Alinhando o texto centralmente */
+  }
+  
+  .sobre h2 {
+    color: #fff; /* Cor do título da seção */
+    font-size: 20px; /* Tamanho do título da seção */
+  }
+  
+  .sobre p {
+    color: #ccc; /* Cor do texto da seção */
+  }
+  
+  .sobre a {
+    color: #fff; /* Cor do link da seção */
+    text-decoration: none; /* Removendo sublinhado do link */
+    background-color: #666; /* Cor de fundo do link da seção */
+    padding: 10px 20px; /* Espaçamento interno do link da seção */
+  }
+
+  

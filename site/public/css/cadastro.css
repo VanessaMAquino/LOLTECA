@@ -87,7 +87,7 @@ input:focus {
 
 input[type="submit"] {
     background-color: #ffffffc0;
-    color: black;
+    color: #FFF;
     border: none;
     border-radius: 20px;
     height: 40px;
