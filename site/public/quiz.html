@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOLTECA | Início </title>
+    <title>LOLTECA | QUIZ </title>
+    <link rel="stylesheet" href="css/quiz.css">
 </head>
+
 <body>
-    
+    <!--DIV MAE-->
+    <div class="background">
+        <div class="header">
+            <h1><img src="img/LOLTECA.png" alt="" class="img"></h1>
+            <div>
+                <a href="quiz.html">Quiz</a>
+                <a href="classificacao.html">Classificação</a>
+            </div>
+            <div class="usuario">
+                <img src="img/soraka.png" width="50px" height="50px">
+                <span id="a_usuario">Usuário</span>
+                <button onclick="menu()" class="botao_menu">
+                    <i class="botao_seta"></i>
+                </button>
+                <div class="sair_inativo">
+                    <p onclick="limpar_sessao()"></p>
+                </div>
+            </div>
+        </div>
+        <div class="quiz">
+            <div class="iniciarQuiz" style="display: none;">
+                <h1 class="titulo_quiz">A qual campeão pertence essa frase ?</h1>
+                <button class="iniciar">Iniciar</button>
+            </div>
+            <div class="conteudoQuiz" style="display: flex;">
+                <h3 id="pergunta">PERGUNTA</h3>
+                <button id="op1" class="option">campeao1</button>
+                <button id="op2" class="option">campeao2</button>
+                <button id="op3" class="option">campeao3</button>
+                <button id="op4" class="option">campeao4</button>
+                <div class="proximo">
+                    <button class="responder" id="responder">Responder</button>
+                </div>
+            </div>
+            <div class="finalizarQuiz">
+                <img src="" alt="" id="imagemNota">
+                <p id="notaFinal"></p>
+                <button onclick="finalizar()" id="botaoFinalizar">Finalizar</button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
+<script src="js/quiz.js"></script>
