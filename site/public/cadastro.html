@@ -10,7 +10,7 @@
 <body>
    <div id="main-container">
     <h1> Cadastre-se para acessar o LOLTECA</h1>
-    <form action="" method="" id="register-form"><!--formulário de validação 'ACTION= comunicação com o backend' 'METHOD= oposto de onde vai receber/puxar dados' -->
+    <form action="" onsubmit="return false" method="" id="register-form"><!--formulário de validação 'ACTION= comunicação com o backend' 'METHOD= oposto de onde vai receber/puxar dados' -->
         <div class="full-box">
             <label for="email">E-mail</label> <!--LABEL = titulo para input-->
             <input type="email" name="email" id="email" placeholder="Digite seu e-mail" data-min-length="3"> <!--placeholder: dica para o usuário data-min é uma validação para o js-->
@@ -36,7 +36,8 @@
             <label for="agreement" id="agreement-label">Eu li e aceito os <a href="img/Termos_de_USO.pdf">termos de uso</a></label>
         </div>
         <div class="full-box">
-            <input type="submit" id="btn-submit" value="Registrar" onclick="Cadastrar()"><!--submit envia o formulario para o servidor-->
+            <button onclick="cadastrar()">Registrar</button>
+            <!--<input type="button" id="btn-submit" value="Registrar" onclick="cadastrar()"><!submit envia o formulario para o servidor-->
         </div>
     </form> 
    </div>
@@ -46,20 +47,22 @@
 
 <script>
     /*atribuindo valor as variaveis*/
-    function Cadastrar(){
-        var e_mail = email.value
-        var nome = name.value
-        var sobrenome = lastname.value
-        var senha = password.value
-        var confirmacaoSenha = passconfirmation.value
+    function cadastrar(){
+        
+        var nomeVar = name.value
+        var sobrenomeVar = lastname.value
+        var e_mailVar = email.value
+        var senhaVar = password.value
+        var confirmacaoSenhaVar = passconfirmation.value
 
-        if (e_mail == "" || nome == "" || sobrenome == ""  || senha == "" || confirmacaoSenha == "") {
+        if (e_mailVar == "" || nomeVar == "" || sobrenomeVar == ""  || senhaVar == "" || confirmacaoSenhaVar == "") {
             alert("Dados incompletos")
             return false;
         }
         else {
             /* setInterval(sumirMensagem, 5000) */
         }
+        console.log(e_mailVar)
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -70,30 +73,24 @@
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nome,
-                emailServer: e_mail,
-                senhaServer: senha,
-                sobrenomeServer: sobrenome
+                nomeServer: nomeVar,
+                sobrenomeServer: sobrenomeVar,
+                emailServer: e_mailVar,
+                senhaServer: senhaVar
+                
             })
         }).then(function (resposta) {
 
             console.log("resposta: ", resposta);
             
             if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000")
 
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+           
         });
 
         return false;
