@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Pathway+Extreme&display=swap');
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+
+body {
+    display: block;
+    margin: 8px;
+}
+
+section{
+    display: block;
+}
+
+.cointainer {
+    margin-right: 100px;
+    margin-left: 100px;
+    height: 100%;
+}
+
+.header-text button {
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+
+.header-text {
+    max-width: 350px;
+    margin-top: 120px;
+    width: 100%;
+}
+
+.first-text {
+    display: inline-block;
+    margin: 15px 0;
+}
+
+.normal-btn {
+    font-size: 20px;
+    padding: 25px 40px;
+    background: transparent;
+    outline: none;
+    border: 3px solid rgb(36 197 219);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.5s;
+}
+
+p {
+    font-size: 23px;
+    color: rgb(100, 98, 100);
+    font-family: 'ABeeZee', sans-serif;
+}
+
+h1 {
+   font-size: 35px
+}
+
+div {
+    display: block;
+}
+
+.img-riven{
+    margin-top: 70px;
+    width: 600px;
+}
+.div-img {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.logo{
+    margin-top: 20px;
+    width: 190px;
+}
+
+nav {
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #333;
+  }
+  
+  nav ul li a:hover {
+    background-color: #333;
+    color: #fff;
+  }

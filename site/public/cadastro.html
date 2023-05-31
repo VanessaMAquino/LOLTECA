@@ -36,11 +36,66 @@
             <label for="agreement" id="agreement-label">Eu li e aceito os <a href="img/Termos_de_USO.pdf">termos de uso</a></label>
         </div>
         <div class="full-box">
-            <input type="submit" id="btn-submit" value="Registrar"><!--submit envia o formulario para o servidor-->
+            <input type="submit" id="btn-submit" value="Registrar" onclick="Cadastrar()"><!--submit envia o formulario para o servidor-->
         </div>
     </form> 
    </div>
    <p class="error-validation-template"></p><!-- paragrafo invisivel para conseguir exibir os paragrafos abaixo das input dando as dicas do placeholder -->
-    <script src="js/cadastro.js"></script>
 </body>
 </html> 
+
+<script>
+    /*atribuindo valor as variaveis*/
+    function Cadastrar(){
+        var e_mail = email.value
+        var nome = name.value
+        var sobrenome = lastname.value
+        var senha = password.value
+        var confirmacaoSenha = passconfirmation.value
+
+        if (e_mail == "" || nome == "" || sobrenome == ""  || senha == "" || confirmacaoSenha == "") {
+            alert("Dados incompletos")
+            return false;
+        }
+        else {
+            /* setInterval(sumirMensagem, 5000) */
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                emailServer: e_mail,
+                senhaServer: senha,
+                sobrenomeServer: sobrenome
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+            
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+</script>

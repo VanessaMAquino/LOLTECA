@@ -27,9 +27,10 @@ body {
   /* Estilizando os botões da barra de navegação */
   .navbar_botoes a {
     color: #fff; /* Cor dos botões */
+    
     text-decoration: none; /* Removendo sublinhado dos botões */
     margin-right: 10px; /* Espaçamento entre os botões */
-    margin: 0 10px; /* Adicionar margem entre os botões */
+    margin: 10px 10px; /* Adicionar margem entre os botões */
   }
   .navbar_botoes {
     text-align: center; /* Centralizar o texto dos botões */
@@ -44,6 +45,7 @@ body {
   /* Estilizando a imagem do banner */
   .banner img {
     width: 100%; /* Largura da imagem do banner */
+    border-radius: 10px;
   }
   
   /* Estilizando os avisos de formulário */
