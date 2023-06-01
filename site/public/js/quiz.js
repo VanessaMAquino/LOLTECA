@@ -233,5 +233,5 @@ function finalizar() {
             idServer: idUser
         })
     });
-    window.location = 'quiz.hmt'
+    window.location = 'classificacao.html'
 }

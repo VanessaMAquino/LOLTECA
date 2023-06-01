@@ -3,10 +3,11 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url(/site/public/img/teemo.png);
-    background-size: center;
+    background-image: url(../img/teemo.png);
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    padding-bottom: 192px;
 }
   .header {
     display: flex;
