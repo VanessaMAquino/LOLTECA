@@ -28,4 +28,10 @@ router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });
 
+router.post("/recuperarId", function (req, res) {
+    usuarioController.recuperarId(req, res);
+});
+
+
 module.exports = router;
+

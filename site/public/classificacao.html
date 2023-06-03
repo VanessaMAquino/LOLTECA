@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/classificacao.css">
     <title>Classificação</title>
+    
 </head>
+
 <body>
     <div class="header">
         <<h1><img src="img/LOLTECA.png" alt="" class="img"></h1>
-        <div class="navbar">
-            <a href="quiz.html">Quiz</a>
-            <a href="classificacao.html">Classificação</a>
-            <a href="formulario.html"> Formulário</a>
-    
-        </div>
-        <div class="usuario">
-            <img src="img/soraka.png" alt="" width="50px" height="50px">
-            <span id="b_usuario">usuário</span>
-            <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
-            <div class="sair--inativo">
-                <p onclick="limparSessao()">Sair</p>
+            <div class="navbar">
+                <a href="quiz.html">Quiz</a>
+                <a href="classificacao.html">Classificação</a>
+
             </div>
-        </div>
+            <div class="usuario">
+                <img src="img/soraka.png" alt="" width="50px" height="50px">
+                <span id="a_usuario">usuário</span>
+                <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
+                <div class="sair--inativo">
+                    <p onclick="limparSessao()">Sair</p>
+                </div>
+            </div>
     </div>
     <div class="background__ranking">
         <div class="conteudo__ranking">
@@ -45,94 +47,125 @@
             </div>
             <div class="ranking">
                 <h1>Ranking Quiz</h1>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.0/chart.min.js"></script>
 
 <script>
-    atualizarCards();
-    atualizarRanking();
-    
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-    function atualizarCards() {
-        fetch("/avisos/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    throw "Nenhum resultado encontrado!!";
-                }
+    a_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+    let proximaAtualizacao;
 
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-                        var contagem = publicacao.contagem
-                        var maiorNota = publicacao.notaMaxima
-                        var menorNota = publicacao.menorNota
-                        var mediaNota = publicacao.media
-                        qtd_quiz.innerHTML = `${contagem}`
-                        maior_nota.innerHTML = `${maiorNota}`
-                        menor_nota.innerHTML = `${menorNota}`
-                        media.innerHTML = `${mediaNota}`
-                    }
+    window.onload = obterDadosGrafico();
 
-                  
+
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function obterDadosGrafico(idAquario) {
+
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idAquario);
                 });
             } else {
-                throw ('Houve um erro na API!');
+                console.error('Nenhum dado encontrado ou erro na API');
             }
-        }).catch(function (resposta) {
-            console.error(resposta);
-        });
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
     }
 
-    function atualizarRanking() {
-        fetch("/avisos/ranquear").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    throw "Nenhum resultado encontrado!!";
-                }
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, idAquario) {
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+        console.log('iniciando plotagem do gráfico...');
 
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-                        var nomeUsuario =  resposta[0].nome
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+        var dataSets = [];
+        const ctx = document.getElementById('myChart');
 
-                        var rankingGeral = document.querySelector('.ranking')
-                        var divPlayers = document.createElement("div");
-                        var posicaoRanking = document.createElement("p");
-                        var nomePlayer = document.createElement("p");
-                        var notaPlayer = document.createElement("p");
-                        
-                        divPlayers.className = "players";
-                        posicaoRanking.className = "rank"
-                        nomePlayer.className = "nome"
-                        notaPlayer.className = "notaPlayer"
+        // Criando estrutura para plotar gráfico - dados
+        // let dados = {
+        //     labels: labels,
+        //     datasets: [{
+        //         label: 'Umidade',
+        //         data: [],
 
-                        rankingGeral.appendChild(divPlayers);
-                        divPlayers.appendChild(posicaoRanking);
-                        divPlayers.appendChild(nomePlayer);
-                        divPlayers.appendChild(notaPlayer);
-                        
-                        posicaoRanking.innerHTML = `${i+1}ª`
-                        nomePlayer.innerHTML = `${publicacao.nome}`
-                        notaPlayer.innerHTML = `Nota: ${publicacao.nota}`
+        //     },
+
+
+        //     ]
+        // };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.nome);
+            dataSets.push(registro.nota);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dataSets)
+        console.log('----------------------------------------------')
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Notas',
+                    data: dataSets,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
                     }
-
-                  
-                });
-            } else {
-                throw ('Houve um erro na API!');
+                }
             }
-        }).catch(function (resposta) {
-            console.error(resposta);
         });
+
     }
+
 </script>
-

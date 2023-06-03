@@ -233,6 +233,6 @@ function finalizar() {
             idServer: idUser
         })
     });
-    window.location = 'quiz.html'
+    window.location = 'classificacao.html'
 }
 

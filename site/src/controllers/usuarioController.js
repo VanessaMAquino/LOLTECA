@@ -128,17 +128,17 @@ function voltar(req, res) {
 function finalizar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var pontos = req.body.pontosServer;
-    var id = req.body.idServer;
+    var idUsuario = req.body.idServer;
 
     // Faça as validações dos valores
     if (pontos == undefined) {
         res.status(400).send("Seus pontos está undefined!");
-    } else if (id == undefined) {
+    } else if (idUsuario == undefined) {
         res.status(400).send("Seu id está undefined!");
     }  else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.finalizar(pontos, id)
+        usuarioModel.finalizar(pontos, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
