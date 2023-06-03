@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <<h1><img src="img/LOLTECA.png" alt="" class="img"></h1>
+        <div class="navbar">
+            <a href="quiz.html">Quiz</a>
+            <a href="classificacao.html">Classificação</a>
+            <a href="formulario.html"> Formulário</a>
+    
+        </div>
+        <div class="usuario">
+            <img src="img/loginuser.png" alt="" width="50px" height="50px">
+            <span id="b_usuario">usuário</span>
+            <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
+            <div class="sair--inativo">
+                <p onclick="limparSessao()">Sair</p>
+            </div>
+        </div>
+    </div>
+    <div class="background__ranking">
+        <div class="conteudo__ranking">
+            <div class="card__metricas">
+                <p>Quantidade de quiz respondidos</p>
+                <p id="qtd_quiz"></p>
+            </div>
+            <div class="card__metricas1">
+                <p>Maior nota</p>
+                <p id="maior_nota">10</p>
+            </div>
+            <div class="card__metricas1">
+                <p>Média das notas</p>
+                <p id="media">10</p>
+            </div>
+            <div class="card__metricas">
+                <p>Menor nota</p>
+                <p id="menor_nota">3</p>
+            </div>
+            <div class="ranking">
+                <h1>Ranking Quiz</h1>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    atualizarCards();
+    atualizarRanking();
+    
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function atualizarCards() {
+        fetch("/avisos/listar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        var contagem = publicacao.contagem
+                        var maiorNota = publicacao.notaMaxima
+                        var menorNota = publicacao.menorNota
+                        var mediaNota = publicacao.media
+                        qtd_quiz.innerHTML = `${contagem}`
+                        maior_nota.innerHTML = `${maiorNota}`
+                        menor_nota.innerHTML = `${menorNota}`
+                        media.innerHTML = `${mediaNota}`
+                    }
+
+                  
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+
+    function atualizarRanking() {
+        fetch("/avisos/ranquear").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        var nomeUsuario =  resposta[0].nome
+
+                        var rankingGeral = document.querySelector('.ranking')
+                        var divPlayers = document.createElement("div");
+                        var posicaoRanking = document.createElement("p");
+                        var nomePlayer = document.createElement("p");
+                        var notaPlayer = document.createElement("p");
+                        
+                        divPlayers.className = "players";
+                        posicaoRanking.className = "rank"
+                        nomePlayer.className = "nome"
+                        notaPlayer.className = "notaPlayer"
+
+                        rankingGeral.appendChild(divPlayers);
+                        divPlayers.appendChild(posicaoRanking);
+                        divPlayers.appendChild(nomePlayer);
+                        divPlayers.appendChild(notaPlayer);
+                        
+                        posicaoRanking.innerHTML = `${i+1}ª`
+                        nomePlayer.innerHTML = `${publicacao.nome}`
+                        notaPlayer.innerHTML = `Nota: ${publicacao.nota}`
+                    }
+
+                  
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+</script>
+
