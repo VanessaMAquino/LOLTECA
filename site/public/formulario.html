@@ -4,9 +4,226 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/formulario.css">
+    <title>Formulário</title>
 </head>
 <body>
     
+    <div class="backgroundform">
+
+
+        <div class="header">
+            <h1><img src="img/LOLTECA.png" alt=""></h1>
+            <div class="navbar">
+                <a href="quiz.html">Quiz</a>
+                <a href="formulario.html" id="aqui">Formulário</a>
+                <a href="ranking.html">Classificação</a>
+            </div>
+            <div class="usuario">
+                <img src="img/loginuser.png" alt="" width="50px" height="50px">
+                <span id="b_usuario">usuário</span>
+                <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
+                <div class="sair--inativo">
+                    <p onclick="limparSessao()">Sair</p>
+                </div>
+            </div>
+        </div>
+        <div class="conteudo__formulario">
+            <div class="card__formulario">
+                <div class="card__inputs">
+                    <h3>Selecione seu estilo de jogo</h3>
+                    <select id="sel_estilo" class="select">
+                        <option value="">Escolha uma opção</option>
+                        <option value="agressivo">Agressivo</option>
+                        <option value="passivo">Passivo</option>
+                    </select>
+                    <h3>Em uma luta você seria a pessoa que:</h3>
+                    <select id="sel_fight" class="select">
+                        <option value="">Escolha uma opção</option>
+                        <option value="frontline">Ficaria na linha de frente</option>
+                        <option value="distancia">Manteria o posicionamento longe dos inimigos</option>
+                        <option value="assassino">Mataria um alvo específico</option>
+                        <option value="buffer">Concederia buffs aos colegas de time</option>
+                    </select>
+                    <h3>No decorrer do game você gostaria de:</h3>
+                    <select id="sel_lane" class="select">
+                        <option value="">Escolha uma opção</option>
+                        <option value="jungle">Focar nos objetivos neutros</option>
+                        <option value="botlane">Jogar com alguém ao lado te auxiliando</option>
+                        <option value="midlane">Jogar em rota solo focando em soltar magias</option>
+                        <option value="toplane">Jogar em rota solo focando em se fortalecer</option>
+                    </select>
+                    <div id="erro_escolha">
+                        <p>Escolha uma opção coerente!</p>
+                    </div>
+                    <button class="card__inputs--botao" onclick="responder()">Responder</button>
+
+                    <div class="carregamento" id="div_aguardar">
+                        <img src="https://i.pinimg.com/originals/ea/7f/61/ea7f61e8e71932cbd0f88007a9c83acb.gif" alt="">
+                    </div>
+                </div>
+                <div class="imagem__formulario">
+                    <img src="img/arcane-1.webp" alt="imagem sion">
+                </div>
+            </div>
+        </div>
+        <div class="conteudo__personagem">
+            <div class="card__personagem">
+                <p id="nomePersonagem"></p>
+                <p id="lanePersonagem"></p>
+                <p id="funcaoPersonagem"></p>
+                <img src="" alt="icone lane" id="imagemLane">
+                <button class="voltar" onclick="voltar()">Voltar</button>
+            </div>
+            <div class="imagem__personagem">
+                <img src="" alt="" id="imagemPersonagem">
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
+
+<script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    const formulario = document.querySelector('.conteudo__formulario')
+    const perso = document.querySelector('.conteudo__personagem')
+    var idUser = sessionStorage.ID_USUARIO
+    var champion = ''
+
+
+    function responder() {
+        div_aguardar.style.display = 'block'
+        setTimeout(function () {
+            personagem();
+        }, 1000);
+    }
+    function personagem() {
+        var estiloVar = sel_estilo.value
+        var teamfightVar = sel_fight.value
+        var laneVar = sel_lane.value
+
+        if (estiloVar == 'agressivo' && teamfightVar == 'assassino' && laneVar == 'midlane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'ZED: A LÂMINA DO TROVÃO'
+            lanePersonagem.innerHTML = 'LANE: MID'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: ASSASSINO'
+            imagemLane.src = 'img/Middle_icon.webp'
+            imagemPersonagem.src = 'img/RiotX_ChampionList_zed.jpg'
+            champion = 'zed'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'assassino' && laneVar == 'midlane' || estiloVar == 'passivo' && teamfightVar == 'assassino' && laneVar == 'toplane' || estiloVar == 'agressivo' && teamfightVar == 'assassino' && laneVar == 'toplane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'LEBLANC: A FARSANTE'
+            lanePersonagem.innerHTML = 'LANE: MID'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: ASSASSINO'
+            imagemLane.src = 'img/Middle_icon.webp'
+            imagemPersonagem.src = 'img/Leblanc_19.jpg'
+            champion = 'leblanc'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'assassino' && laneVar == 'jungle' || estiloVar == 'agressivo' && teamfightVar == 'assassino' && laneVar == 'jungle') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'KHA ZIX: O CEIFADOR DO VAZIO'
+            lanePersonagem.innerHTML = 'LANE: JUNGLE'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: ASSASSINO'
+            imagemLane.src = 'img/icon-position-jungle.png'
+            imagemPersonagem.src = 'img/Khazix_4.jpg'
+            champion = 'Kha Zix'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'frontline' && laneVar == 'jungle' || estiloVar == 'agressivo' && teamfightVar == 'frontline' && laneVar == 'jungle') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'SEJUANI: A FÚRIA DO NORTE'
+            lanePersonagem.innerHTML = 'LANE: JUNGLE'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: LUTADOR'
+            imagemLane.src = 'img/icon-position-jungle.png'
+            imagemPersonagem.src = 'img/Sejuani_0.jpg'
+            champion = 'Sejuani'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'frontline' && laneVar == 'toplane' || estiloVar == 'agressivo' && teamfightVar == 'frontline' && laneVar == 'toplane' || estiloVar == 'agressivo' && teamfightVar == 'frontline' && laneVar == 'midlane' || estiloVar == 'passivo' && teamfightVar == 'frontline' && laneVar == 'midlane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'SION: O COLOSSO MORTO-VIVO'
+            lanePersonagem.innerHTML = 'LANE: TOP'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: LUTADOR'
+            imagemLane.src = 'img/Top_icon.png'
+            imagemPersonagem.src = 'img/sion.jpg'
+            champion = 'Sion'
+        }
+
+        else if (estiloVar == 'passivo' && teamfightVar == 'frontline' && laneVar == 'botlane' || estiloVar == 'agressivo' && teamfightVar == 'frontline' && laneVar == 'botlane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'LEONA: A ALVORADA RADIANTE'
+            lanePersonagem.innerHTML = 'LANE: SUPORTE'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: SUPORTE'
+            imagemLane.src = 'img/Bottom_icon.webp'
+            imagemPersonagem.src = 'img/Leona_11.jpg'
+            champion = 'Leona'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'distancia' && laneVar == 'botlane' || estiloVar == 'agressivo' && teamfightVar == 'distancia' && laneVar == 'botlane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'EZREAL: O EXPLORADOR PRÓDIGO'
+            lanePersonagem.innerHTML = 'LANE: ADC'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: ATIRADOR'
+            imagemLane.src = 'img/Bottom_icon.webp'
+            imagemPersonagem.src = 'img/Ezreal_25.jpg'
+            champion = 'Ezreal'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'distancia' && laneVar == 'midlane' || estiloVar == 'agressivo' && teamfightVar == 'distancia' && laneVar == 'midlane' || estiloVar == 'agressivo' && teamfightVar == 'distancia' && laneVar == 'toplane' || estiloVar == 'passivo' && teamfightVar == 'distancia' && laneVar == 'toplane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'RYZE: O MAGO RÚNICO'
+            lanePersonagem.innerHTML = 'LANE: MID/TOP'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: MAGO'
+            imagemLane.src = 'img/Middle_icon.webp'
+            imagemPersonagem.src = 'img/Ryze_11.jpg'
+            champion = 'Ryze'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'buffer' && laneVar == 'jungle' || estiloVar == 'agressivo' && teamfightVar == 'buffer' && laneVar == 'jungle') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'IVERN: O PAI DO VERDE'
+            lanePersonagem.innerHTML = 'LANE: JUNGLE'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: LUTADOR'
+            imagemLane.src = 'img/icon-position-jungle.png'
+            imagemPersonagem.src = 'img/Ivern_0.jpg'
+            champion = 'IVERN'
+        }
+        else if (estiloVar == 'passivo' && teamfightVar == 'buffer' && laneVar == 'botlane' || estiloVar == 'agressivo' && teamfightVar == 'buffer' && laneVar == 'botlane' || estiloVar == 'agressivo' && teamfightVar == 'buffer' && laneVar == 'midlane' || estiloVar == 'passivo' && teamfightVar == 'buffer' && laneVar == 'midlane') {
+            formulario.style.display = 'none'
+            perso.style.display = 'grid'
+            nomePersonagem.innerHTML = 'SERAPHINE: A CANTORA SONHADORA'
+            lanePersonagem.innerHTML = 'LANE: SUPORTE/MID'
+            funcaoPersonagem.innerHTML = 'FUNÇÃO: MAGO'
+            imagemLane.src = 'img/Bottom_icon.webp'
+            imagemPersonagem.src = 'img/Seraphine.jpg'
+            champion = 'Seraphine'
+        }
+        else {
+            div_aguardar.style.display = 'none'
+            erro_escolha.style.display = 'block'
+        }
+
+    }
+    function voltar() {
+        fetch("/usuarios/voltar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                championServer: champion,
+                idServer: idUser
+            })
+        });
+        window.location = "formulario.html";
+    }
+</script>
