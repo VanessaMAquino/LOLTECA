@@ -49,7 +49,7 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: rgba(0, 0, 0, 0.507);
+    background: rgba(0, 0, 0, 0.763);
   }
   
   .grid {
@@ -98,6 +98,10 @@ main {
   .disabled-card {
     filter: saturate(0);
     opacity: 0.5;
+  }
+
+  .audio__musica {
+    margin-left: 80%;
   }
   
   @media screen and (max-width:920px) {

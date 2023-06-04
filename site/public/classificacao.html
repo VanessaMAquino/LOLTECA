@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/classificacao.css">
     <title>Classificação</title>
-    
+
 </head>
 
 <body>
@@ -15,22 +15,21 @@
         <<h1><img src="img/LOLTECA.png" alt="" class="img"></h1>
             <div class="navbar">
                 <a href="quiz.html">Quiz</a>
-                <a href="classificacao.html">Classificação</a>
-
-            </div>
-            <div class="usuario">
-                <img src="img/soraka.png" alt="" width="50px" height="50px">
-                <span id="a_usuario">usuário</span>
-                <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
-                <div class="sair--inativo">
-                    <p onclick="limparSessao()">Sair</p>
+                <a href="memoria.html">Memória</a>
+                <div class="usuario">
+                    <img src="img/soraka.png" alt="" width="50px" height="50px">
+                    <span id="a_usuario">usuário</span>
+                    <button onclick="menu()" class="botao--menu"><i class="fi fi-rs-angle-small-down"></i></button>
+                    <div class="sair--inativo">
+                        <p onclick="limparSessao()">Sair</p>
+                    </div>
                 </div>
             </div>
     </div>
     <div class="background__ranking">
         <div class="conteudo__ranking">
             <div class="card__metricas">
-                <p>Quantidade de quiz respondidos</p>
+                <p>Notas dos quiz respondidos</p>
                 <p id="qtd_quiz"></p>
             </div>
             <div class="card__metricas1">
@@ -143,7 +142,7 @@
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels:')
         console.log(labels)
-        console.log('Dados:')0
+        console.log('Dados:')
         console.log(dataSets)
         console.log('----------------------------------------------')
 
@@ -154,7 +153,8 @@
                 datasets: [{
                     label: 'Notas',
                     data: dataSets,
-                    borderWidth: 1
+                    borderWidth: 1, 
+                    backgroundColor: '#B5B28F',
                 }]
             },
             options: {

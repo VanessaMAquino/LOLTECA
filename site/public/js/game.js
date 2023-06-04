@@ -15,6 +15,8 @@ const characters = [
   'sorakaa',
 ];
 
+var score = 0
+
 // Função auxiliar para criar um elemento HTML com a tag e classe especificadas
 const createElement = (tag, className) => {
   const element = document.createElement(tag);
@@ -41,6 +43,8 @@ const checkCards = () => {
   const secondCharacter = secondCard.getAttribute('data-character');
 
   if (firstCharacter === secondCharacter) { // Se as duas cartas forem iguais
+      score = score + 10
+      pontos.innerHTML = `${score}`
 
     firstCard.firstChild.classList.add('disabled-card');
     secondCard.firstChild.classList.add('disabled-card');
