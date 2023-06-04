@@ -15,12 +15,41 @@ main {
     align-items: center;
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.8);
-    font-size: 1.2em;
+    font-size: 20px;
     width: 100%;
     max-width: 800px;
     padding: 30px;
     margin: 0 0 30px;
     border-radius: 5px;
+  }
+
+  a {
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 20px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 20px 10px 15px 5px;
+  }
+
+  a:hover {
+    opacity: 0.7;
+  }
+
+  .logo {
+    width: 20%;
+    margin: 5px;
+    
+  }
+
+  .navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.507);
   }
   
   .grid {

@@ -17,23 +17,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #33333375;
+    background-color: #0000009f;
     padding: 4px;
     color: #ffffff;
     
   }
 
-  .navbar {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
-    text-transform: uppercase;
-    font-size: 18px;
-    align-items: center;
+  .navbar a {
+    color: #fff;
+    background: rgba(66, 65, 65, 0.986);
+    font-size: 20px;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 20px 10px 15px 5px;
+    margin-right: 200px;
 }
   
   .img {
-    height: 40px;
+    width: 20%;
+    margin: 5px;
   }
   
   .usuario {
@@ -45,6 +48,18 @@ body {
     margin: 10px;
   }
 
+  .botao_sorteio {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   
+  }
   
   .botao_seta {
     display: inline-block;
@@ -85,7 +100,7 @@ body {
   
   .option {
     display: block;
-    width: 40%;
+    width: 15%;
     padding: 10px;
     margin-top: 10px;
     background-color: #fff;

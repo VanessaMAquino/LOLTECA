@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -43,7 +43,7 @@
                 <button id="op4" class="option">campeao4</button>
                 <div class="proximo">
                     <button class="responder" id="responder">Responder</button>
-                    <button class="sorteio" onclick="sortear()">Sorteio de ELO</button>
+                    <button class="botao_sorteio" onclick="sortear()">Sorteio de ELO</button>
                 </div>
             </div>
             <div class="finalizarQuiz">
@@ -58,7 +58,7 @@
 </html>
 <script>
     function sortear() {
-        var imagens = ["./img/ferro.png", "", "", "", ""];
+        var imagens = ["./img/ferro.png", "./img/bronze.png", "./img/prata.png", "./img/gold.png", "./img/platina.png", "./img/diamante.png", "./img/mestre.png"];
 
         // Embaralhar a ordem das imagens usando o algoritmo Fisher-Yates shuffle
         function shuffle(array) {

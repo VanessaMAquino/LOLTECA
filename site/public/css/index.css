@@ -20,14 +20,18 @@ body {
   
   /* Estilizando os links da barra de navegação */
   .header a {
-    color: #fff; /* Cor dos links do cabeçalho */
-    text-decoration: none; /* Removendo sublinhado dos links */
     display: inline-block; /* Exibir o link como um bloco inline */
   }
   
   /* Estilizando os botões da barra de navegação */
   .navbar_botoes a {
-    color: #fff; /* Cor dos botões */
+    color: #0e0d0d;
+    padding: 10px 20px;
+    background-origin: none;
+    transition: 0.3s;
+    cursor: pointer;
+    border-radius: 20px 10px 15px 5px;
+    background-color: #757171;/* Cor dos botões */
     
     text-decoration: none; /* Removendo sublinhado dos botões */
     margin-right: 10px; /* Espaçamento entre os botões */
@@ -70,6 +74,7 @@ body {
     text-decoration: none; /* Removendo sublinhado do link */
     background-color: #666; /* Cor de fundo do link dos avisos */
     padding: 10px 20px; /* Espaçamento interno do link dos avisos */
+     border-radius: 20px 10px 15px 5px; 
   }
   
   /* Estilizando a seção "O que é League of Legends" */
