@@ -17,7 +17,7 @@
             <div class="navbar">
                 <a href="quiz.html">Quiz</a>
                 <a href="classificacao.html">Classificação</a>
-                
+
             </div>
             <div class="usuario">
                 <img src="img/soraka.png" width="50px" height="50px">
@@ -43,6 +43,7 @@
                 <button id="op4" class="option">campeao4</button>
                 <div class="proximo">
                     <button class="responder" id="responder">Responder</button>
+                    <button class="sorteio" onclick="sortear()">Sorteio de ELO</button>
                 </div>
             </div>
             <div class="finalizarQuiz">
@@ -55,5 +56,58 @@
 </body>
 
 </html>
+<script>
+    function sortear() {
+        var imagens = ["./img/ferro.png", "", "", "", ""];
+
+        // Embaralhar a ordem das imagens usando o algoritmo Fisher-Yates shuffle
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
+        // Embaralhar as imagens
+        var imagensEmbaralhadas = shuffle(imagens);
+
+        // Número de imagens que serão sorteadas
+        var numSorteios = 1;
+
+        // Função para exibir a imagem
+        function exibirImagem(imagemPath) {
+            // Criar um elemento de imagem
+            var imagem = document.createElement("img");
+
+            // Definir o atributo src com o caminho da imagem
+            imagem.src = imagemPath;
+
+            // Adicionar a imagem ao corpo do documento
+            document.body.appendChild(imagem);
+        }
+
+        // Loop for para realizar os sorteios
+        for (var i = 0; i < numSorteios; i++) {
+            // Verificar se todas as imagens foram sorteadas
+            if (i >= imagensEmbaralhadas.length) {
+                break;
+            }
+
+            // Obter a próxima imagem sorteada
+            var imagemSorteada = imagensEmbaralhadas[i];
+
+            // Exibir a imagem sorteada
+            exibirImagem(imagemSorteada);
+        }
+    }
+</script>
 
 <script src="js/quiz.js"></script>
